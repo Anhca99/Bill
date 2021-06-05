@@ -47,16 +47,25 @@ subTitle4 = 'Thành tiền'
 subTitle5 = 'Cá kho'
 subTitle6 = 'Thịt kho'
 subTitle7 = 'Canh chua'
+subTitle18 = 'Cơm chiên'
+subTitle19 = 'Cơm cháy'
+subTitle20 = 'Cơm nóng'
 
 # Sub title Số lượng
 subTitle8 = '2'
 subTitle9 = '4'
 subTitle10 = '5'
+subTitle21 = '2'
+subTitle22 = '4'
+subTitle23 = '4'
 
 # Sub title Thành tiền
 subTitle11 = '50.000 VNĐ'
 subTitle12 = '50.000 VNĐ'
 subTitle13 = '50.000 VNĐ'
+subTitle24 = '50.000 VNĐ'
+subTitle25 = '50.000 VNĐ'
+subTitle26 = '50.000 VNĐ'
 
 #Sub title phương thức thanh toán
 subTitle14 = 'Phương thức thanh toán:'
@@ -68,7 +77,7 @@ subTitle15 = 'MoMo'
 subTitle16 = 'Tổng thanh toán:'
 
 #Sub title kết quả sum
-subTitle17 = '150.000 VNĐ'
+subTitle17 = '300.000 VNĐ'
 
 # textLines = [
 # 'Công ty TNHH một thành viên Hutech',
@@ -101,7 +110,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
 pdfmetrics.registerFont(
-    TTFont('abc','tahoma.ttf')
+    TTFont('abc','Roboto-Regular.ttf')
 )
 pdf.setFont('abc',14)
 # pdf.drawString(Khoảng cách từ phải qua, khoảng cách từ trên xuống, title)
@@ -129,7 +138,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
 pdfmetrics.registerFont(
-    TTFont(subTitle1,'TAHOMAB0.TTF')
+    TTFont(subTitle1,'Roboto-Bold.ttf')
 )
 pdf.setFont(subTitle1,30)
 # pdf.setFillColorRGB(0, 0, 255)
@@ -141,7 +150,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
 pdfmetrics.registerFont(
-    TTFont('subTitle2','tahoma.ttf')
+    TTFont('subTitle2','Roboto-Regular.ttf')
 )
 pdf.setFont('subTitle2',25)
 # pdf.setFont('subTitle2',25)
@@ -152,7 +161,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
 pdfmetrics.registerFont(
-    TTFont('subTitle3','tahoma.ttf')
+    TTFont('subTitle3','Roboto-Regular.ttf')
 )
 pdf.setFont('subTitle3',25)
 pdf.drawString(280, 580, subTitle3)
@@ -162,7 +171,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
 pdfmetrics.registerFont(
-    TTFont('subTitle4','tahoma.ttf')
+    TTFont('subTitle4','Roboto-Regular.ttf')
 )
 pdf.setFont('subTitle4',25)
 pdf.drawString(450, 580, subTitle4)
@@ -175,46 +184,57 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
 pdfmetrics.registerFont(
-    TTFont('subTitle5','tahoma.ttf')
+    TTFont('subTitle5','Roboto-Regular.ttf')
 )
 pdf.setFont('subTitle5',14)
 pdf.drawString(50, 530, subTitle5)
 pdf.drawString(50, 470, subTitle6)
 pdf.drawString(50, 410, subTitle7)
+pdf.drawString(50, 350, subTitle18)
+pdf.drawString(50, 290, subTitle19)
+pdf.drawString(50, 230, subTitle20)
 
 # 5. Sub title Số lượng
 pdf.drawString(285, 530, subTitle8)
 pdf.drawString(285, 470, subTitle9)
 pdf.drawString(285, 410, subTitle10)
+pdf.drawString(285, 350, subTitle21)
+pdf.drawString(285, 290, subTitle22)
+pdf.drawString(285, 230, subTitle23)
 
-# 5. Sub title Thành tiền
+# 6. Sub title Thành tiền
 pdf.drawString(480, 530, subTitle11)
 pdf.drawString(480, 470, subTitle12)
 pdf.drawString(480, 410, subTitle13)
+pdf.drawString(480, 350, subTitle24)
+pdf.drawString(480, 290, subTitle25)
+pdf.drawString(480, 230, subTitle26)
 
-pdf.line(0,380,600,380)
+pdf.line(0,200,600,200)
 
-# 4. Sub title phương thức thanh toán
+# 7. Sub title phương thức thanh toán
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
 pdfmetrics.registerFont(
-    TTFont('subTitle14','tahoma.ttf')
+    TTFont('subTitle14','Roboto-Regular.ttf')
 )
 pdf.setFont('subTitle14',20)
-pdf.drawString(10, 330, subTitle14)
-pdf.drawString(285, 330, subTitle15)
+pdf.drawString(10, 150, subTitle14)
+pdf.drawString(285, 150, subTitle15)
 
-# 4. Sub title Tổng tiền
+# 8. Sub title Tổng tiền
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
 pdfmetrics.registerFont(
-    TTFont('subTitle16','tahoma.ttf')
+    TTFont('subTitle16','Roboto-Regular.ttf')
 )
 pdf.setFont('subTitle16',25)
-pdf.drawString(10, 290, subTitle16)
-pdf.drawString(285, 290, subTitle17)
+pdf.drawString(10, 110, subTitle16)
+pdf.drawString(285, 110, subTitle17)
+
+
 
 # ####################################################
 # # 3) Draw a line
