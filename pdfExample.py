@@ -5,6 +5,7 @@ from typing import Text
 from reportlab.lib import colors
 
 
+
 # def drawMyRuler(pdf):
 #     pdf.drawString(100,810, 'x100')
 #     pdf.drawString(200,810, 'x200')
@@ -43,29 +44,36 @@ subTitle2 = 'Món ăn'
 subTitle3 = 'SL'
 subTitle4 = 'Thành tiền'
 
-# Sub title món ăn
-subTitle5 = 'Cá kho'
-subTitle6 = 'Thịt kho'
-subTitle7 = 'Canh chua'
-subTitle18 = 'Cơm chiên'
-subTitle19 = 'Cơm cháy'
-subTitle20 = 'Cơm nóng'
 
-# Sub title Số lượng
-subTitle8 = '2'
-subTitle9 = '4'
-subTitle10 = '5'
-subTitle21 = '2'
-subTitle22 = '4'
-subTitle23 = '4'
+# Thấy cái hoá đơn nó trả về gì không. Nó trả về mảng ( array )
+# thì cái ở bên trong nó sẽ nhưu vậy, vậy thiếu hả thiết kế thiếu đúng ko
+# này là dư thiếu gì
+# cái này mới đúng là cái nó trả về
+textLines=[
+  {
+    "name":"Cơm",
+    "quantity":2,
+    "price":1000
+  },
+  {
+    "name":"Cơm",
+    "quantity":2,
+    "price":1000
+  },
+  {
+    "name":"Cơm",
+    "quantity":2,
+    "price":1000
+  },
+  {
+    "name":"Cơm",
+    "quantity":2,
+    "price":1000
+  },
 
-# Sub title Thành tiền
-subTitle11 = '50.000 VNĐ'
-subTitle12 = '50.000 VNĐ'
-subTitle13 = '50.000 VNĐ'
-subTitle24 = '50.000 VNĐ'
-subTitle25 = '50.000 VNĐ'
-subTitle26 = '50.000 VNĐ'
+]
+
+
 
 #Sub title phương thức thanh toán
 subTitle14 = 'Phương thức thanh toán:'
@@ -178,67 +186,86 @@ pdf.drawString(450, 580, subTitle4)
 
 #gạch ngang (bắt đầu, khoảng cách x từ trên xuống, điểm kết thúc, khoảng cách x từ trên xuống)
 pdf.line(0,570,600,570)
+y=530
+for item in textLines:
+    # xem thử mới vào y bằng bao nheeiu
+    # giờ lấy thg name trước nha
+    # Lấy đưuuddwuojci thì đi  vẽ
+    # lấy toạ độ bắt đầu cái danh sách là 530 nha
+    # nó bị chồng nhau do ở cùng 1 toạ độ
+    # ==> mỗi thg nên xuống tâm 50 độ nữa
+    # Thấy chưa giờ tới 2 cái thông số kia, bằng trục dọc
+    # tương đương bị chồng, này là đổi trục ngang vì nó phải nằm chung 1 dòng nên ko đổi y
+    pdf.drawString(50,y,item["name"])
+    # nó chỉ nhận str thôi (string)
+    # vậy cho nó bằng vs maasycasi tiêu đê
+    # đó thấy chưa. Giờ đến cái đường kẻ ngang
+    pdf.drawString(280,y,str(item["quantity"]))
+    pdf.drawString(450,y,str(item["price"]))
+    y=y-50 # tương đương y-=20
+    # kết thúc 1 vòng lặp thì y còn bao nhiêu
+    # cái ra cuối cùng bị thừa tại đâu có item nào ở dưới nó nữa đâu nên mình phải cộng lại 50 khi kết thúc vòng fỏ
+# do cái đường kẻ ngang ở dưới ko được set cứng vì nhiều hàng thì nó phải xuống. Nên mình phải tính toạ độ của cái trên trừ ra
+y=y+20
+# lấy y làm toạ độ để cân cái đường kẻ
+# nó xát vách luôn giờ là lúc mình trừ ra khoảng mình muốn, vd là 30 đi
+pdf.line(0,y,600,y)
+# đó giờ mình thêm bao nhiêu cũng dc mà đâu tuỳ kích thước trang, kích thước lớn quá thì nó bị overflow hidden tràn dòng
+# nó lủng 1 lỗ to đùng thấy ko. Do thg cuối bị trừ dư, nên mình phải cộng lại cho huề
+    # từ đây set 2 thg dưới thì phụ thuộc vào y luôn.\
+print('hiện tại',y)
+pdf.drawString(50,y-50,"Phương thức thanh toán")
+pdf.drawString(50,y-100,"Tổng tiền")
+# bên trên là do chưa set pagesiz nên nó bị tràn viền luôn, fix size là dc
+# dính dách luôn
+# giờ trừ ra tiếp
+# # 4. Sub title Món ăn
+# from reportlab.pdfbase.ttfonts import TTFont
+# from reportlab.pdfbase import pdfmetrics
 
-# 4. Sub title Món ăn
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfbase import pdfmetrics
+# pdfmetrics.registerFont(
+#     TTFont('subTitle5','Roboto-Regular.ttf')
+# )
+# pdf.setFont('subTitle5',14)
+# # do nó là mảng( linh động, tại vì có người ăn nhiều ăn ít, mảng nó ko cố định, nên mình lưu vào mảng cho nó co giãn thoải mái)
+# # mà đển in cái mảng ra thì dùng for
+# # vd
+# # này là lặp lấy từng phần tử trong mảng
+# # tương tự như trên
+# # do cái này là mảng có chứ object nên để lấy từng giá trị của object thì bỏ ["giá trị cần lấy"] cái này t tra gg ra chứ cũng ngồi mò sml với thg python
 
-pdfmetrics.registerFont(
-    TTFont('subTitle5','Roboto-Regular.ttf')
-)
-pdf.setFont('subTitle5',14)
-pdf.drawString(50, 530, subTitle5)
-pdf.drawString(50, 470, subTitle6)
-pdf.drawString(50, 410, subTitle7)
-pdf.drawString(50, 350, subTitle18)
-pdf.drawString(50, 290, subTitle19)
-pdf.drawString(50, 230, subTitle20)
-
-# 5. Sub title Số lượng
-pdf.drawString(285, 530, subTitle8)
-pdf.drawString(285, 470, subTitle9)
-pdf.drawString(285, 410, subTitle10)
-pdf.drawString(285, 350, subTitle21)
-pdf.drawString(285, 290, subTitle22)
-pdf.drawString(285, 230, subTitle23)
-
-# 6. Sub title Thành tiền
-pdf.drawString(480, 530, subTitle11)
-pdf.drawString(480, 470, subTitle12)
-pdf.drawString(480, 410, subTitle13)
-pdf.drawString(480, 350, subTitle24)
-pdf.drawString(480, 290, subTitle25)
-pdf.drawString(480, 230, subTitle26)
-
-pdf.line(0,200,600,200)
-
-# 7. Sub title phương thức thanh toán
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfbase import pdfmetrics
-
-pdfmetrics.registerFont(
-    TTFont('subTitle14','Roboto-Regular.ttf')
-)
-pdf.setFont('subTitle14',20)
-pdf.drawString(10, 150, subTitle14)
-pdf.drawString(285, 150, subTitle15)
-
-# 8. Sub title Tổng tiền
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfbase import pdfmetrics
-
-pdfmetrics.registerFont(
-    TTFont('subTitle16','Roboto-Regular.ttf')
-)
-pdf.setFont('subTitle16',25)
-pdf.drawString(10, 110, subTitle16)
-pdf.drawString(285, 110, subTitle17)
+# pdf.line(0,200,600,200)
+# # nó in ra từ 0 đến 5 vì ko lấy bằng 6 :D. Này kiến thức C nên bn chắc biết r
+# # 7. Sub title phương thức thanh toán
 
 
 
-# ####################################################
-# # 3) Draw a line
-# pdf.line(30,710, 550, 710)
+# from reportlab.pdfbase.ttfonts import TTFont
+# from reportlab.pdfbase import pdfmetrics
+
+# pdfmetrics.registerFont(
+#     TTFont('subTitle14','Roboto-Regular.ttf')
+# )
+# pdf.setFont('subTitle14',20)
+# pdf.drawString(10, 150, subTitle14)
+# pdf.drawString(285, 150, subTitle15)
+
+# # 8. Sub title Tổng tiền
+# from reportlab.pdfbase.ttfonts import TTFont
+# from reportlab.pdfbase import pdfmetrics
+
+# pdfmetrics.registerFont(
+#     TTFont('subTitle16','Roboto-Regular.ttf')
+# )
+# pdf.setFont('subTitle16',25)
+# pdf.drawString(10, 110, subTitle16)
+# pdf.drawString(285, 110, subTitle17)
+
+
+
+# # ####################################################
+# # # 3) Draw a line
+# # pdf.line(30,710, 550, 710)
 
 
 
@@ -247,25 +274,25 @@ pdf.drawString(285, 110, subTitle17)
 
 
 
-# ####################################################
-# 4) Text object :: for large amounts of text
-# from reportlab.lib import colors
+# # ####################################################
+# # 4) Text object :: for large amounts of text
+# # from reportlab.lib import colors
 
-# text = pdf.beginText(40, 680)
-# text.setFont("Courier", 18)
-# text.setFillColor(colors.red)
-# for line in textLines:
-#     text.textLine(line)
+# # text = pdf.beginText(40, 680)
+# # text.setFont("Courier", 18)
+# # text.setFillColor(colors.red)
+# # for line in textLines:
+# #     text.textLine(line)
 
-# pdf.drawText(text)
-
-
+# # pdf.drawText(text)
 
 
 
-# #################################################
-# 5) Draw a image
-# pdf.drawInlineImage(image,130,400)
+
+
+# # #################################################
+# # 5) Draw a image
+# # pdf.drawInlineImage(image,130,400)
 
 
 
